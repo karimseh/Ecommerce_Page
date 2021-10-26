@@ -1,0 +1,124 @@
+/* ############## Mobile Menu Part ############### */
+let menuButton = document.querySelector('#menu');
+let sideMenu = document.querySelector('.side-menu')
+let closeMenu = document.querySelector('#close')
+menuButton.addEventListener('click',()=>{
+   sideMenu.classList.add('show')
+   document.querySelector('.lightbox').style.display = 'block'
+})
+closeMenu.addEventListener('click',()=>{
+    sideMenu.classList.remove('show')
+    document.querySelector('.lightbox').style.display = 'none'
+})
+window.addEventListener('mouseup',(e)=>{
+    console.log(e.target)
+    if (e.target !== sideMenu && !sideMenu.contains(e.target) ){
+   
+        sideMenu.classList.remove('show')
+        document.querySelector('.lightbox').style.display = 'none'
+    }
+})
+
+/* ############## Carousel Part ############### */
+
+let next = document.querySelector('#next')
+let prev = document.querySelector('#prev')
+let carousel = document.querySelector('.carousel-container')
+let left = 0;
+
+next.addEventListener('click',() => {
+     if (left > -300 ){
+       
+         carousel.style.left = `${left-100}%`
+         left = left-100
+         if(left == -300){
+            next.classList.add("disabled")
+         }
+     } 
+     if(left < 0){
+        prev.classList.remove("disabled")
+     }
+})
+prev.addEventListener('click',() => {
+    if(next.classList.contains('disabled')){
+        next.classList.remove('disabled');
+    }
+    
+    if (left< 0){
+        carousel.style.left =`${left+100}%`
+        left = left+100
+
+    }
+    if (left==0){
+        prev.classList.add("disabled")
+    }
+})
+/* ############## Input numebr Part ############### */
+let minus= document.querySelector('#minus');
+let plus = document.querySelector('#plus');
+let input = document.querySelector('#qte');
+plus.addEventListener('click',() =>{
+    input.value = Number(input.value) + 1
+})
+minus.addEventListener('click',() =>{
+    if(Number(input.value)!== 0){
+        input.value = Number(input.value) - 1
+    }
+    
+})
+/* ############## cart icon ############# */
+let cart_btn = document.querySelector('#cart-btn');
+let cart = document.querySelector('#cart');
+let product = document.querySelector('.product');
+let msg = document.querySelector('#msg')
+let cart_badge = document.querySelector('#cart-badge');
+let delete_btn = document.querySelector('#delete')
+cart_btn.addEventListener('click',() =>{
+    cart.style.display == 'block' ? cart.style.display = 'none' : cart.style.display = 'block';
+})
+let qte = document.querySelector('#quantity');
+let total = document.querySelector('#total');
+
+
+let quantity= 0;
+let price = 125.00;
+
+let add_to_cart = document.querySelector('#add-to-cart-btn');
+add_to_cart.addEventListener('click', () =>{
+    console.log(qte, total)
+    quantity = input.value;
+    if(quantity != 0){
+        cart_badge.innerHTML= quantity;
+        qte.innerHTML = quantity;
+        total.innerHTML = `$${quantity*price}.00`;
+        msg.style.display="none";
+        cart_badge.style.display='block';
+        product.style.display ="flex"
+
+    }
+
+})
+delete_btn.addEventListener('click',()=>{
+        quantity = 0;
+        msg.style.display="block";
+        cart_badge.style.display='none';
+        product.style.display ="none"
+})
+
+/* ############## SlideShow Part ############### */
+let img_container = document.querySelector(".image-container");
+let thumnails = document.querySelectorAll(".thumbnail-item ");
+let last_selected = 0;
+let span = document.createElement("span");
+span.classList.add('img-mask');
+[...thumnails].forEach((thumbnail, index)=>{
+   thumbnail.addEventListener('click',() =>{
+        img_container.children[0].src = `http://127.0.0.1:5500/assets/image-product-${index+1}.jpg`;
+        thumnails[last_selected].removeChild(document.querySelector('.img-mask'))
+        last_selected = index;
+        thumnails[last_selected].prepend(span);
+
+    
+   })
+})
+
