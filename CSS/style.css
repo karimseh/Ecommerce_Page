@@ -65,6 +65,9 @@ body{
     cursor: pointer;
     
 }
+.modal{
+    display: none;
+}
 #profile{
     width: 30px;
 }
