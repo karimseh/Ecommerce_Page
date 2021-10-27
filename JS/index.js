@@ -111,6 +111,7 @@ let thumnails = document.querySelectorAll(".thumbnail-item ");
 let last_selected = 0;
 let span = document.createElement("span");
 span.classList.add('img-mask');
+
 [...thumnails].forEach((thumbnail, index)=>{
    thumbnail.addEventListener('click',() =>{
         img_container.children[0].src = `http://127.0.0.1:5500/assets/image-product-${index+1}.jpg`;
@@ -122,3 +123,73 @@ span.classList.add('img-mask');
    })
 })
 
+/* ############## Modal Part ############### */
+let close_modal = document.querySelector('#close-modal');
+let modal = document.querySelector('.modal');
+let modal_img_container = document.querySelector('.modal-img-container');
+let modal_prev = document.querySelector('#modal-prev');
+let modal_next = document.querySelector('#modal-next');
+let modal_thumnails = document.querySelectorAll('.modal-thumbs-item')
+let modal_span = document.createElement("span");
+modal_span.classList.add('modal-img-mask');
+
+img_container.addEventListener('click', ()=>{
+    modal.style.display = "flex";
+    
+})
+
+close_modal.addEventListener('click',()=>{
+        modal.style.display = "none";
+})
+let image_index = 1;
+modal_next.addEventListener('click',() =>{
+    if(image_index < 4 ){
+       modal_thumnails[image_index-1].removeChild(document.querySelector('.modal-img-mask'))
+        image_index++;
+        modal_img_container.children[1].src = `http://127.0.0.1:5500/assets/image-product-${image_index}.jpg`
+        modal_thumnails[image_index-1].prepend(modal_span)
+
+        
+    }else{
+        image_index = 1;
+        modal_thumnails[image_index-1].prepend(modal_span)
+        modal_img_container.children[1].src = `http://127.0.0.1:5500/assets/image-product-${image_index}.jpg`
+    }
+ 
+});
+modal_prev.addEventListener('click',() =>{
+    if(image_index > 1 ){
+        modal_thumnails[image_index-1].removeChild(document.querySelector('.modal-img-mask'))
+        image_index--;
+        modal_img_container.children[1].src = `http://127.0.0.1:5500/assets/image-product-${image_index}.jpg`
+        modal_thumnails[image_index-1].prepend(modal_span)
+        
+    }else{
+        modal_thumnails[image_index-1].removeChild(document.querySelector('.modal-img-mask'))
+        image_index = 4;
+        modal_img_container.children[1].src = `http://127.0.0.1:5500/assets/image-product-${image_index}.jpg`
+        modal_thumnails[image_index-1].prepend(modal_span)
+    }
+ 
+});
+[...modal_thumnails].forEach((thumbs, index)=>{
+    thumbs.addEventListener('click',()=>{
+        modal_thumnails[image_index-1].removeChild(document.querySelector('.modal-img-mask'))
+        image_index = index + 1;
+        modal_img_container.children[1].src = `http://127.0.0.1:5500/assets/image-product-${image_index}.jpg`;
+        modal_thumnails[index].prepend(modal_span)
+    })
+});
+/* ############## Hovers ############# */
+modal_next.addEventListener('mouseover', () => {
+    modal_next.children[0].children[0].style.stroke = 'orangered'
+})
+modal_next.addEventListener('mouseout', () => {
+    modal_next.children[0].children[0].style.stroke = 'black'
+})
+modal_prev.addEventListener('mouseover', () => {
+    modal_prev.children[0].children[0].style.stroke = 'orangered'
+})
+modal_prev.addEventListener('mouseout', () => {
+    modal_prev.children[0].children[0].style.stroke = 'black'
+})
