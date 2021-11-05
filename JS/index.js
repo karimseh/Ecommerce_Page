@@ -11,7 +11,7 @@ closeMenu.addEventListener('click',()=>{
     document.querySelector('.lightbox').style.display = 'none'
 })
 window.addEventListener('mouseup',(e)=>{
-    console.log(e.target)
+  
     if (e.target !== sideMenu && !sideMenu.contains(e.target) ){
    
         sideMenu.classList.remove('show')
@@ -85,7 +85,7 @@ let price = 125.00;
 
 let add_to_cart = document.querySelector('#add-to-cart-btn');
 add_to_cart.addEventListener('click', () =>{
-    console.log(qte, total)
+
     quantity = input.value;
     if(quantity != 0){
         cart_badge.innerHTML= quantity;
@@ -114,7 +114,7 @@ span.classList.add('img-mask');
 
 [...thumnails].forEach((thumbnail, index)=>{
    thumbnail.addEventListener('click',() =>{
-        img_container.children[0].src = `http://127.0.0.1:5500/assets/image-product-${index+1}.jpg`;
+        img_container.children[0].src = `./assets/image-product-${index+1}.jpg`;
         thumnails[last_selected].removeChild(document.querySelector('.img-mask'))
         last_selected = index;
         thumnails[last_selected].prepend(span);
@@ -146,14 +146,14 @@ modal_next.addEventListener('click',() =>{
     if(image_index < 4 ){
        modal_thumnails[image_index-1].removeChild(document.querySelector('.modal-img-mask'))
         image_index++;
-        modal_img_container.children[1].src = `http://127.0.0.1:5500/assets/image-product-${image_index}.jpg`
+        modal_img_container.children[1].src = `./assets/image-product-${image_index}.jpg`
         modal_thumnails[image_index-1].prepend(modal_span)
 
         
     }else{
         image_index = 1;
         modal_thumnails[image_index-1].prepend(modal_span)
-        modal_img_container.children[1].src = `http://127.0.0.1:5500/assets/image-product-${image_index}.jpg`
+        modal_img_container.children[1].src = `./assets/image-product-${image_index}.jpg`
     }
  
 });
@@ -161,13 +161,13 @@ modal_prev.addEventListener('click',() =>{
     if(image_index > 1 ){
         modal_thumnails[image_index-1].removeChild(document.querySelector('.modal-img-mask'))
         image_index--;
-        modal_img_container.children[1].src = `http://127.0.0.1:5500/assets/image-product-${image_index}.jpg`
+        modal_img_container.children[1].src = `./assets/image-product-${image_index}.jpg`
         modal_thumnails[image_index-1].prepend(modal_span)
         
     }else{
         modal_thumnails[image_index-1].removeChild(document.querySelector('.modal-img-mask'))
         image_index = 4;
-        modal_img_container.children[1].src = `http://127.0.0.1:5500/assets/image-product-${image_index}.jpg`
+        modal_img_container.children[1].src = `./assets/image-product-${image_index}.jpg`
         modal_thumnails[image_index-1].prepend(modal_span)
     }
  
@@ -176,7 +176,7 @@ modal_prev.addEventListener('click',() =>{
     thumbs.addEventListener('click',()=>{
         modal_thumnails[image_index-1].removeChild(document.querySelector('.modal-img-mask'))
         image_index = index + 1;
-        modal_img_container.children[1].src = `http://127.0.0.1:5500/assets/image-product-${image_index}.jpg`;
+        modal_img_container.children[1].src = `./assets/image-product-${image_index}.jpg`;
         modal_thumnails[index].prepend(modal_span)
     })
 });
